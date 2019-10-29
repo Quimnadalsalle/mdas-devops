@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash         
 #Pones el hint para que ejecuten el script con este shell (puedes poner sh x ejemplo)
 
@@ -77,3 +78,19 @@ cleanup
 build
 retry test      #Arriba estara la funcion retry.
     
+=======
+#!/bin/bash
+set -e
+
+# install deps
+go get github.com/gorilla/websocket
+go get github.com/labstack/echo
+
+# cleanup
+rm -rf build
+
+# build 
+mkdir build
+go build -o ./build ./src/votingapp 
+cp -r ./src/votingapp/ui ./build
+>>>>>>> c3e7793... super simple pipeline
