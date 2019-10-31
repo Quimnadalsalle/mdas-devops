@@ -86,12 +86,13 @@ set -e
 deps(){
     go get github.com/gorilla/websocket
     go get github.com/labstack/echo
+    go get github.com/go-redis/redis
 }
 
 # cleanup
 cleanup(){
     pkill votingapp || ps aux | grep votingapp | awk {'print $1'} | head -1 | xargs kill -9
-    rm -rf build || true
+    rm -rf build
 }
 
 # build 
@@ -106,6 +107,7 @@ build(){
     go build -o ./build ./src/votingapp 
     cp -r ./src/votingapp/ui ./build
 
+    docker run -p 6379:6379 -d redis || true
     pushd build
     ./votingapp &
     popd
@@ -118,7 +120,7 @@ retry(){
     $@ && return 0
     until [ $n -ge $retries ]
     do
-        n=$[$n+1]
+        n=$(($n+1))
         echo "Retrying...$n of $retries, wait for $interval seconds"
         sleep $interval
         $@ && return 0
@@ -158,7 +160,7 @@ test() {
 }
 
 deps
-cleanup
+cleanup || true
 build
 retry test
 >>>>>>> 2b90b58... siguiente clase
