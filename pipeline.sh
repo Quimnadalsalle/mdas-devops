@@ -1,7 +1,7 @@
 #!/bin/bash         
 #Pones el hint para que ejecuten el script con este shell (puedes poner sh x ejemplo)
 
-#set -e                              #que el script pare cuando hay un error
+set -e                              #que el script pare cuando hay un error
 #set +e                              #el script sigue aunque haya errores
 
 deps(){
@@ -12,9 +12,8 @@ deps(){
 
 #Cleanup
 cleanup(){
+    pkill votingapp || ps aux | grep votingapp | head -1 | awk '{print $1}' | xargs kill -9    #matas el proceso (sh) por si te lo habias dejado abierto
     rm -rf build                        #Por si ya tenemos el directorio
-    pkill votingapp || ps aux | grep votingapp | head -1 | awk { 'print $1' } | xargs kill -9    #matas el proceso (sh) por si te lo habias dejado abierto
-
 }
 
 #Build
@@ -28,20 +27,35 @@ build(){
     popd    
 }
 
+retry(){
+    n=0
+    interval=5
+    retries=3
+    $@ && return 0                                  #$@ refers to all of a shell script’s command-line arguments.
+    until [ $n -ge $retries ]                       #-ge is great equal
+    do
+        n=$[$n+1]
+        echo "Retrying...$n of $retries, wait for $interval seconds"
+        sleep $interval
+        $@ && return 0
+    done
+
+    return 1
 
 #Test
 test(){
-    curl --url http://localhost/vote \
+    votingurl='http://localhost/vote'
+    curl --url $votingurl \
         --request POST \ 
         --data  '{"topics":["dev", "ops"]}' \
         --header "Content-Type: application/json"
 
-    curl --url http://localhost/vote \
+    curl --url $votingurl \
         --request PUT \ 
         --data  '{"topic":"dev"}'
         --header "Content-Type: application/json"
 
-    winner=(curl --url http://localhost/vote \
+    winner=(curl --url $votingurl \
         --request DELETE \ 
         --header "Content-Type: application/json" | jq -r '.winner')    #jq acepta lo de la izquierda y con el -r le envias una query sobre la propiedad de winner
 
