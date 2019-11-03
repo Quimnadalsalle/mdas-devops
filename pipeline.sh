@@ -41,29 +41,29 @@ retry(){
     done
 
     return 1
-
+}
 #Test
 test(){
     votingurl='http://localhost/vote'
     curl --url $votingurl \
-        --request POST \ 
+        --request POST \
         --data  '{"topics":["dev", "ops"]}' \
         --header "Content-Type: application/json"
 
     curl --url $votingurl \
-        --request PUT \ 
-        --data  '{"topic":"dev"}'
+        --request PUT \
+        --data  '{"topic":"dev"}' \
         --header "Content-Type: application/json"
 
-    winner=(curl --url $votingurl \
-        --request DELETE \ 
+    winner=$(curl --url $votingurl \
+        --request DELETE \
         --header "Content-Type: application/json" | jq -r '.winner')    #jq acepta lo de la izquierda y con el -r le envias una query sobre la propiedad de winner
 
     echo "Winner IS "$winner
 
-    expectedWinner = "dev"
+    expectedWinner="dev"
 
-    if ["$expectedWinner" == "$winner"]; then
+    if [ "$expectedWinner" == "$winner" ]; then
         echo 'TEST PASSED'
         exit 0
     else
