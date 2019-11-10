@@ -17,4 +17,4 @@
 
 # Indice para cooregir:
 ## Ejercicio 1 - Pipelines
-
+test_pipeline.py (master)
