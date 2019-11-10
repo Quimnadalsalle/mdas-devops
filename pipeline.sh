@@ -1,7 +1,7 @@
 #!/bin/bash         
 #Pones el hint para que ejecuten el script con este shell (puedes poner sh x ejemplo)
 
-set -e                              #que el script pare cuando hay un error
+#set -e                              #que el script pare cuando hay un error
 #set +e                              #el script sigue aunque haya errores
 
 deps(){
