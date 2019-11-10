@@ -1,21 +1,21 @@
-########## BUILDER ##########
-#La imagen de golang viene de debian. Podemos tener muchos stages
-FROM golang AS builder
-#copio desde votingapp hasta la imagen
 
-RUN go get github.com/gorilla/websocket && \
-    go get github.com/labstack/echo
+########## BUILDER ##########
+FROM alpine:latest AS builder
+ 
+RUN apk update && \
+    apk add bash && \
+    apk add --no-cache git make musl-dev go
+
+    #apk add github.com/gorilla/websocket && \
+    #apk add github.com/go-redis/redis
 
 COPY . .
 
-RUN go build -o ./build/votingapp && \
+RUN apk build -o ./build/votingapp && \
     cp -r ui /build
 
 ######### RUNTIME #############
-FROM ubuntu:18.04
-
-#RUN apt-get update && apt-get install golang -y && rm -rf /var/lib/apt/lists/*
-#Me situo en la carpeta app y le hago un copy de build
+FROM alpine:latest
 WORKDIR /app
 COPY --from=builder build .
 
