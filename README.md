@@ -15,6 +15,6 @@
 * [Dockerhub](https://hub.docker.com)
 * [Github](https://github.com)
 
-# Indice para cooregir:
+# Indice para corregir:
 ## Ejercicio 1 - Pipelines
 test_pipeline.py (master)
