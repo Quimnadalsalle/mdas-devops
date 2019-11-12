@@ -15,3 +15,11 @@
 * [Dockerhub](https://hub.docker.com)
 * [Github](https://github.com)
 
+# Indice para corregir:
+## Ejercicio 1 - Pipelines
+test_pipeline.py (master)
+## Ejercicio 2 - Dockerizar votingapp + tests
+Todavía en desarrollo en la rama: pipeline_docker_alpine
+Archivos afectados:
+ Carpetas: src/votingapp, Test
+ Archivos: pipeline-docker.sh
