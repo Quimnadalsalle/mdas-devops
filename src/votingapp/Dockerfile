@@ -4,14 +4,14 @@ FROM alpine:latest AS builder
  
 RUN apk update && \
     apk add bash && \
-    apk add --no-cache git make musl-dev go
-
-    #apk add github.com/gorilla/websocket && \
-    #apk add github.com/go-redis/redis
+    apk add --no-cache git make musl-dev go && \
+    go get github.com/gorilla/websocket && \
+    go get github.com/go-redis/redis && \
+    go get github.com/labstack/echo
+  
 
 COPY . .
-
-RUN apk build -o ./build/votingapp && \
+RUN go build -o ./build/votingapp && \
     cp -r ui /build
 
 ######### RUNTIME #############

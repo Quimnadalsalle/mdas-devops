@@ -2,7 +2,7 @@ FROM alpine:latest
 
 RUN apk update && \
     apk add bash && \
-    apk add --update python py-pip python-dev && \
+    apk add --update python py-pip python-dev
     #&& rm -rf /var/lib/apt/lists/*
 COPY test_pipeline.py .
 RUN chmod +x test_pipeline.py
