@@ -20,3 +20,9 @@ services:
       context: ./test
     environment:
       VOTINGAPP_HOST: "myvotingapp"
+
+  mynginx:
+    image: nginx
+    build:
+      context: ./nginx
+    
