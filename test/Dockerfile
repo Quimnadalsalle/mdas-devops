@@ -1,11 +1,9 @@
-FROM alpine:latest
+FROM ubuntu:18.04
 
-RUN apk update && \
-    apk add bash && \
-    apk add --update python py-pip python-dev && \
-    pip install requests
-    #&& rm -rf /var/lib/apt/lists/*
-COPY test_pipeline.py .
-RUN chmod +x test_pipeline.py
+RUN apt-get update && apt-get install -y curl jq && rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT [ "bash", "-c", "./test_pipeline.py" ]
+COPY test.sh .
+
+RUN chmod +x test.sh
+
+ENTRYPOINT [ "./test.sh" ]
