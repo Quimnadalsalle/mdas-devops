@@ -4,8 +4,9 @@ FROM alpine:latest AS builder
  
 RUN apk update && \
     apk add bash && \
-    apk add --no-cache git make musl-dev go && \
-    go get github.com/gorilla/websocket && \
+    apk add --no-cache git make musl-dev go
+
+RUN go get github.com/gorilla/websocket && \
     go get github.com/go-redis/redis && \
     go get github.com/labstack/echo
   
