@@ -26,7 +26,7 @@ docker run \
 # test
 docker build \
     -t quimnadalsalle/votingapp-test \
-    ./Test
+    ./test
 
 docker run \
     --rm -e VOTINGAPP_HOST="myvotingapp" \
