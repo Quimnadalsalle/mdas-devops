@@ -17,11 +17,11 @@
 
 # Indice para corregir:
 ## Ejercicio 1 - Pipelines
-En la carpeta Ejercicio 1 (master):
-Ejecutar pipeline.sh para levantar el servicio y ejecutar los tests./n
-El test está en test_pipeline.py
+En la carpeta Ejercicio 1 (**master**):  
+Ejecutar **pipeline.sh** para levantar el servicio y ejecutar los tests.  
+El test está en **test_pipeline.py**  
 ## Ejercicio 2 - Dockerizar votingapp + tests
-Todavía en desarrollo en la rama: pipeline_docker_alpine
-Archivos afectados:
- Carpetas: src/votingapp, Test
- Archivos: pipeline-docker.sh
+En la rama: **pipeline_docker_alpine_v2**  
+Ejecutamos la pipeline en la carpeta Ejercicio_2: **pipeline_docker_alpine.sh**  
+En **./src/votingapp** está el Dockerfile basado en alpine para ejecutar la app en un container  
+En **./test** está el Dockerfile para ejecutar el test de Python en un container  
