@@ -1,9 +1,6 @@
-FROM alpine:latest
+FROM ubuntu:18.04
 
-RUN apk add --update && \
-    apk add curl && \
-    apk add jq && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl jq && rm -rf /var/lib/apt/lists/*
 
 COPY test.sh .
 
