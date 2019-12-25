@@ -18,7 +18,7 @@
 # Indice para corregir:
 ## Ejercicio 1 - Pipelines
 En la carpeta Ejercicio 1 (master):
-Ejecutar pipeline.sh para levantar el servicio y ejecutar los tests.
+Ejecutar pipeline.sh para levantar el servicio y ejecutar los tests./n
 El test está en test_pipeline.py
 ## Ejercicio 2 - Dockerizar votingapp + tests
 Todavía en desarrollo en la rama: pipeline_docker_alpine
