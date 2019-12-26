@@ -2,12 +2,13 @@ import requests
 import json
 import time
 
-url = 'http://localhost/vote'
+url = 'http://myvotingapp/vote'
 data1 = {'topics':['dev', 'ops']}
 data2 = {'topic':'dev'}
 params = 'winner'
 n=2
-for i in range (1,4):
+
+for i in range(1,4):
     try:
         request1=requests.post(url, data=data1) #pasar los datos como diccionario y luego pasarlo a json, no como string 
         request2=requests.put(url, json=data2)

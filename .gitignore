@@ -2,4 +2,8 @@
 build
 =======
 build
+<<<<<<< HEAD
 >>>>>>> acb024874f080c03ab3796195a4b94b7d8210770
+=======
+>>>>>>> 256d698... ignore build folder
+>>>>>>> pipeline_docker_alpine_v2

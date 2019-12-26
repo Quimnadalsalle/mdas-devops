@@ -135,6 +135,82 @@ build
 retry test      #Arriba estara la funcion retry.
     
 =======
+<<<<<<< HEAD
+=======
+#!/bin/bash
+set -e
+
+# install deps
+deps(){
+    go get github.com/gorilla/websocket
+    go get github.com/labstack/echo
+    go get github.com/go-redis/redis
+}
+
+# cleanup
+cleanup(){
+    pkill votingapp || ps aux | grep votingapp | awk {'print $1'} | head -1 | xargs kill -9
+    rm -rf build
+}
+
+# build 
+<<<<<<< HEAD
+mkdir build
+go build -o ./build ./src/votingapp 
+cp -r ./src/votingapp/ui ./build
+>>>>>>> c3e7793... super simple pipeline
+=======
+build(){
+    mkdir build
+    go build -o ./build ./src/votingapp 
+    cp -r ./src/votingapp/ui ./build
+
+    docker run -p 6379:6379 -d redis || true
+    pushd build
+    ./votingapp &
+    popd
+}
+
+retry(){
+    n=0
+    interval=5
+    retries=3
+    $@ && return 0
+    until [ $n -ge $retries ]
+    do
+        n=$(($n+1))
+        echo "Retrying...$n of $retries, wait for $interval seconds"
+        sleep $interval
+        $@ && return 0
+    done
+
+    return 1
+}
+
+# test
+test() {
+    votingurl='http://localhost/vote'
+    curl --url  $votingurl \
+        --request POST \
+        --data '{"topics":["dev", "ops"]}' \
+        --header "Content-Type: application/json" 
+
+    curl --url $votingurl \
+        --request PUT \
+        --data '{"topic": "dev"}' \
+        --header "Content-Type: application/json" 
+    
+    winner=$(curl --url $votingurl \
+        --request DELETE \
+        --header "Content-Type: application/json" | jq -r '.winner')
+
+    echo "Winner IS "$winner
+
+    expectedWinner="dev"
+
+    if [ "$expectedWinner" == "$winner" ]; then
+        echo 'TEST PASSED'
+>>>>>>> pipeline_docker_alpine_v2
         return 0
     else
         echo 'TEST FAILED'
@@ -146,4 +222,8 @@ deps
 cleanup || true
 build
 retry test
+<<<<<<< HEAD
 >>>>>>> acb024874f080c03ab3796195a4b94b7d8210770
+=======
+>>>>>>> 2b90b58... siguiente clase
+>>>>>>> pipeline_docker_alpine_v2

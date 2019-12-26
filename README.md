@@ -19,8 +19,6 @@
 * [Github](https://github.com)
 * [Azure Education](https://azureforeducation.microsoft.com/devtools)
 
-### Pull most popular images
-
 # Indice para corregir:
 ## Ejercicio 1 - Pipelines
 En la carpeta Ejercicio 1 (**master**):  
