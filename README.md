@@ -21,7 +21,7 @@
 
 # Indice para corregir:
 ## Ejercicio 1 - Pipelines
-En la carpeta Ejercicio 1 (**master**):  
+En la carpeta Ejercicio 1 (**rama develop-until-it-compiles**):  
 Ejecutar **pipeline.sh** para levantar el servicio y ejecutar los tests.  
 El test está en **test_pipeline.py**  
 ## Ejercicio 2 - Dockerizar votingapp + tests
