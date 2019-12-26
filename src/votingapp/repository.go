@@ -37,8 +37,4 @@ func saveState(state votingState) error {
 	}
 
 	return client.Set("votingState", string(b), 0).Err()
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e46e554... containers up, missing to execute them
