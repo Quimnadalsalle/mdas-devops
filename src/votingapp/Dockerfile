@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ########## BUILDER ##########
 #La imagen de golang viene de debian. Podemos tener muchos stages
 FROM golang AS builder
@@ -24,3 +25,25 @@ ENTRYPOINT [ "./votingapp" ]
 
 
 
+=======
+######## BUILDER #########
+FROM golang AS builder
+
+RUN go get github.com/gorilla/websocket && \
+    go get github.com/labstack/echo && \
+    go get github.com/go-redis/redis
+
+COPY . .
+
+RUN go build -o /build/votingapp && \
+    cp -r ui /build
+
+
+######## RUNTIME #########
+FROM ubuntu:18.04
+
+WORKDIR /app
+COPY --from=builder /build .
+
+ENTRYPOINT [ "./votingapp" ]
+>>>>>>> acb024874f080c03ab3796195a4b94b7d8210770

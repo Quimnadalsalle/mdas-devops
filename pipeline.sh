@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash         
 #Pones el hint para que ejecuten el script con este shell (puedes poner sh x ejemplo)
 
@@ -25,16 +26,51 @@ build(){
     pushd build                                     #Cambias de contexto -> es como un cd hasta que haces popd
     ./votingapp &                                   #Con el & ejecutas en background
     popd    
+=======
+#!/bin/bash
+set -e
+
+# install deps
+deps(){
+    go get github.com/gorilla/websocket
+    go get github.com/labstack/echo
+    go get github.com/go-redis/redis
+}
+
+# cleanup
+cleanup(){
+    pkill votingapp || ps aux | grep votingapp | awk {'print $1'} | head -1 | xargs kill -9
+    rm -rf build
+}
+
+# build 
+build(){
+    mkdir build
+    go build -o ./build ./src/votingapp 
+    cp -r ./src/votingapp/ui ./build
+
+    docker run -p 6379:6379 -d redis || true
+    pushd build
+    ./votingapp &
+    popd
+>>>>>>> acb024874f080c03ab3796195a4b94b7d8210770
 }
 
 retry(){
     n=0
     interval=5
     retries=3
+<<<<<<< HEAD
     $@ && return 0                                  #$@ refers to all of a shell script’s command-line arguments.
     until [ $n -ge $retries ]                       #-ge is great equal
     do
         n=$[$n+1]
+=======
+    $@ && return 0
+    until [ $n -ge $retries ]
+    do
+        n=$(($n+1))
+>>>>>>> acb024874f080c03ab3796195a4b94b7d8210770
         echo "Retrying...$n of $retries, wait for $interval seconds"
         sleep $interval
         $@ && return 0
@@ -42,6 +78,7 @@ retry(){
 
     return 1
 }
+<<<<<<< HEAD
 #Test
 test(){
     votingurl='http://localhost/vote'
@@ -58,6 +95,25 @@ test(){
     winner=$(curl --url $votingurl \
         --request DELETE \
         --header "Content-Type: application/json" | jq -r '.winner')    #jq acepta lo de la izquierda y con el -r le envias una query sobre la propiedad de winner
+=======
+
+# test
+test() {
+    votingurl='http://localhost/vote'
+    curl --url  $votingurl \
+        --request POST \
+        --data '{"topics":["dev", "ops"]}' \
+        --header "Content-Type: application/json" 
+
+    curl --url $votingurl \
+        --request PUT \
+        --data '{"topic": "dev"}' \
+        --header "Content-Type: application/json" 
+    
+    winner=$(curl --url $votingurl \
+        --request DELETE \
+        --header "Content-Type: application/json" | jq -r '.winner')
+>>>>>>> acb024874f080c03ab3796195a4b94b7d8210770
 
     echo "Winner IS "$winner
 
@@ -65,6 +121,7 @@ test(){
 
     if [ "$expectedWinner" == "$winner" ]; then
         echo 'TEST PASSED'
+<<<<<<< HEAD
         exit 0
     else
         echo 'TEST FAILED'
@@ -77,3 +134,16 @@ cleanup
 build
 retry test      #Arriba estara la funcion retry.
     
+=======
+        return 0
+    else
+        echo 'TEST FAILED'
+        return 1
+    fi
+}
+
+deps
+cleanup || true
+build
+retry test
+>>>>>>> acb024874f080c03ab3796195a4b94b7d8210770
