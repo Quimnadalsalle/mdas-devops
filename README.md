@@ -21,7 +21,8 @@
 
 # Indice para corregir:
 ## Ejercicio 1 - Pipelines
-En la carpeta Ejercicio 1 (**rama develop-until-it-compiles**):  
+En la rama **develop-until-it-compiles**
+En la carpeta Ejercicio 1:  
 Ejecutar **pipeline.sh** para levantar el servicio y ejecutar los tests.  
 El test está en **test_pipeline.py**  
 ## Ejercicio 2 - Dockerizar votingapp + tests
@@ -29,3 +30,9 @@ En la rama: **pipeline_docker_alpine_v2**
 Ejecutamos la pipeline en la carpeta Ejercicio_2: **pipeline_docker_alpine.sh**  
 En **./src/votingapp** está el Dockerfile basado en alpine para ejecutar la app en un container  
 En **./test** está el Dockerfile para ejecutar el test de Python en un container  
+## Ejercicio 3a - Docker Compose - Nueva Imagen Nginx
+En la rama: **ejercicio_3_docker_compose_nginx**
+Ejecutamos la pipeline en la carpeta Ejercicio_3: **pipeline_compose.sh**
+La pipeline me sale en RED porque no me deja pushear las imagenes con el docker-compose push.
+Si me deja hacer push de cada imagen por separado (votingapp, votingapp_test & nginx)
+## Ejercicio 3b - Docker Compose - Imagen Nginx config en volumen
