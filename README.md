@@ -35,4 +35,9 @@ En la rama: **ejercicio_3_docker_compose_nginx**
 Ejecutamos la pipeline en la carpeta Ejercicio_3: **pipeline_compose.sh**
 La pipeline me sale en RED porque no me deja pushear las imagenes con el docker-compose push.
 Si me deja hacer push de cada imagen por separado (votingapp, votingapp_test & nginx)
+PD. He hecho troubleshooting del error de push (estoy logueado en Docker etc.) y no he conseguido evitarlo.
 ## Ejercicio 3b - Docker Compose - Imagen Nginx config en volumen
+En la rama: **ejercicio_3b_docker_volumen_nginx**
+Ejecutamos la pipeline en la carpeta Ejercicio_3: **pipeline_compose.sh**
+La pipeline me sale en GREEN aunque  no me deja hacer push de las imagenes.
+PD. He hecho troubleshooting del error de push (estoy logueado en Docker etc.) y no he conseguido evitarlo.
