@@ -12,11 +12,10 @@ services:
       REDIS: "myredis:6379"
 
   webserver:
-    image: quimnadalsalle/nginx
+    image: nginx:alpine
     container_name: nginx-webserver
-    build: 
-      dockerfile: Dockerfile
-      context: ./nginx
+    volumes: 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: unless-stopped
     tty: true
     ports:
