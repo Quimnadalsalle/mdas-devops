@@ -30,3 +30,71 @@ spec:
     app: mynginx
     env: staging
   type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votingapp
+  namespace: mdas
+spec:
+  selector:
+    matchLabels:
+      app: myvotingapp
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: myvotingapp
+    spec:
+      containers:
+      - name: votingapp
+        image: quimnadalsalle/votingapp
+        ports:
+        - containerPort: 5050
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: votingapp
+    namespace: mdas
+  spec:
+    ports:
+      - port: 5050
+        protocol: TCP
+    selector:
+      app: myvotingapp
+      env: staging
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: mdas
+spec:
+  selector:
+    matchLabels:
+      app: myredis
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: myredis
+    spec:
+      containers:
+      - name: myredis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myredis
+    namespace: mdas
+  spec:
+    ports:
+      - port: 6379
+        protocol: TCP
+    selector:
+      app: myredis
+      env: staging
