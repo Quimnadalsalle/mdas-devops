@@ -39,5 +39,9 @@ PD. He hecho troubleshooting del error de push (estoy logueado en Docker etc.) y
 ## Ejercicio 3b - Docker Compose - Imagen Nginx config en volumen
 En la rama: **ejercicio_3b_docker_volumen_nginx**
 Ejecutamos la pipeline en la carpeta Ejercicio_3: **pipeline_compose.sh**
-La pipeline me sale en GREEN aunque  no me deja hacer push de las imagenes.
+La pipeline me sale en GREEN aunque no me deja hacer push de las imagenes.
 PD. He hecho troubleshooting del error de push (estoy logueado en Docker etc.) y no he conseguido evitarlo.
+## Ejercicio 4 - Kubernetes
+En la rama: **ejercicio_4_kubernetes**
+Ejecutamos la pipeline en root: **pipeline-k8s.sh**
+El ejercicio no me funciona. No me pasa el test pero no se detectar en qué fallo.
